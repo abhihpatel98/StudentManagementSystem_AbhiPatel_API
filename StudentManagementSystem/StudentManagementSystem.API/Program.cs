@@ -51,6 +51,11 @@ namespace StudentManagementSystem.API
             {
                 app.UseSwagger();
                 app.UseSwaggerUI();
+
+                // Apply pending migrations when in dev env.
+                using var scope = app.Services.CreateScope();
+                var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+                dbContext.Database.Migrate();
             }
 
             app.UseHttpsRedirection();
