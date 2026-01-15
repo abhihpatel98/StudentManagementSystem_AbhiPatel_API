@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
+using StudentManagementSystem.Application.DTOs;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
@@ -13,15 +14,15 @@ namespace StudentManagementSystem.API.Controllers
         private readonly IConfiguration _config = config;
 
         [HttpPost("login")]
-        public IActionResult Login(string username, string password)
+        public IActionResult Login(LoginDto login)
         {
             // Hardcoded credentials (allowed)
-            if (username != "admin" || password != "admin123")
+            if (login.Username != "admin" || login.Password != "admin123")
                 return Unauthorized("Invalid credentials");
 
             var claims = new[]
             {
-                new Claim(ClaimTypes.Name, username)
+                new Claim(ClaimTypes.Name, login.Username)
             };
 
             var key = new SymmetricSecurityKey(
