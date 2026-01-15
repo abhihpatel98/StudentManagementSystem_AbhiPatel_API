@@ -23,6 +23,19 @@ namespace StudentManagementSystem.API
             builder.Services.AddScoped<IClassService, ClassService>();
 
             builder.Services.AddControllers();
+
+            // -------------------- CORS Setup --------------------
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("AllowFrontend",
+                    policy =>
+                    {
+                        policy.WithOrigins("http://localhost:5173")
+                              .AllowAnyHeader()
+                              .AllowAnyMethod();
+                    });
+            });
+
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
 
@@ -101,7 +114,7 @@ namespace StudentManagementSystem.API
             }
 
             app.UseHttpsRedirection();
-
+            app.UseCors("AllowFrontend");
             app.UseAuthentication();
             app.UseAuthorization();
 
