@@ -1,4 +1,4 @@
 ﻿namespace StudentManagementSystem.Application.DTOs
 {
-    public record StudentDto(int Id, string FirstName, string LastName, string PhoneNumber);
+    public record StudentDto(int Id, string FirstName, string LastName, string EmailId, string PhoneNumber, string[] Classes);
 }

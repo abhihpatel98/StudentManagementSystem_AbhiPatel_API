@@ -120,7 +120,9 @@ namespace StudentManagementSystem.Application.Services
                 student.Id,
                 student.FirstName,
                 student.LastName,
-                student.PhoneNumber
+                student.EmailId,
+                student.PhoneNumber,
+                student.StudentClasses.Select(c => c.Class.Name).ToArray()
             );
         }
     }
