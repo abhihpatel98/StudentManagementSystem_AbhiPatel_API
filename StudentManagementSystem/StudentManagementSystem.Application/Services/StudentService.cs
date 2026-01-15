@@ -122,7 +122,7 @@ namespace StudentManagementSystem.Application.Services
                 student.LastName,
                 student.EmailId,
                 student.PhoneNumber,
-                student.StudentClasses.Select(c => c.Class.Name).ToArray()
+                student.StudentClasses.Select(c => new ClassDto(c.Class.Id, c.Class.Name, c.Class.Description)).ToList()
             );
         }
     }
