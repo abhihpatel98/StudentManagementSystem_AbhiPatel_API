@@ -2,7 +2,10 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using StudentManagementSystem.Application.Interfaces;
+using StudentManagementSystem.Application.Services;
 using StudentManagementSystem.Infrastructure.Data;
+using StudentManagementSystem.Infrastructure.Repositories;
 using System.Text;
 
 namespace StudentManagementSystem.API
@@ -14,6 +17,10 @@ namespace StudentManagementSystem.API
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
+            builder.Services.AddScoped<IStudentRepository, StudentRepository>();
+            builder.Services.AddScoped<IClassRepository, ClassRepository>();
+            builder.Services.AddScoped<IStudentService, StudentService>();
+            builder.Services.AddScoped<IClassService, ClassService>();
 
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
